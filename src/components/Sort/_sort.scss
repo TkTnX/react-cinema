@@ -1,0 +1,23 @@
+.sort {
+  width: 30%;
+  position: relative;
+}
+.sort__title {
+  cursor: pointer;
+  span {
+    color: var(--mainColor);
+    font-weight: 800;
+  }
+}
+.sort__dropdown {
+  position: absolute;
+  bottom: -150px;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #45218056;
+  li {
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+  }
+}

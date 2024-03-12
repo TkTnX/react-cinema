@@ -1,0 +1,40 @@
+.header {
+  padding-bottom: 20px;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 749px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 60px;
+  }
+}
+.header__logo-title {
+  color: var(--mainColor);
+  font-weight: 600;
+  font-size: 25px;
+}
+.header__search {
+  input {
+    border: 1px solid var(--mainColor);
+    padding: 10px 20px;
+    border-radius: 35px;
+
+    &::placeholder {
+      color: var(--mainColor);
+      font-weight: 300;
+    }
+  }
+}

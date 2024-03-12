@@ -1,0 +1,31 @@
+.card {
+  border: 1px solid var(--mainColor);
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: var(--mainColor);
+  color: #fff;
+  max-width: 340px;
+}
+.card__title {
+  padding-top: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+.card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 15px;
+}
+
+.card__btn {
+  border: 1px solid white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+  }
+}
