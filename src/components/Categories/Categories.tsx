@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import "./_categories.scss";
 
-const categoriesList = ["Все", "Комедии", "Ужасы", "Фантастика", "Драма"];
+const categoriesList = ["Все", "Комедия", "Хоррор", "Фентези", "Драма"];
 
-export const Categories: React.FC = () => {
+export type CategoriesDataType = {
+  setCategoryData: (categoryItem: string) => void;
+  categoryItem?: string;
+};
+
+export const Categories: React.FC<CategoriesDataType> = ({
+  setCategoryData,
+}) => {
   const [activeCategory, setActiveCategory] = useState(0);
+
+  const onClickSetCategoryData = (index: number, categoryItem: string) => {
+    setActiveCategory(index);
+    setCategoryData(categoryItem);
+  };
 
   return (
     <ul className="categories">
       {categoriesList.map((categoryItem, index) => {
         return (
-          <li onClick={() => setActiveCategory(index)} key={index}>
+          <li
+            onClick={() => onClickSetCategoryData(index, categoryItem)}
+            key={index}
+          >
             <button className={activeCategory === index ? "active" : ""}>
               {categoryItem}
             </button>

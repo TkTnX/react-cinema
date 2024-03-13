@@ -21,6 +21,10 @@ body {
   background-color: var(--mainColor);
 }
 
+a {
+  color: inherit;
+}
+
 .hr {
   height: 1px;
   width: 100%;
@@ -70,4 +74,18 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 100px;
+}
+
+.not-found {
+  text-align: center;
+
+  h2 {
+    font-size: 35px;
+    font-weight: 600;
+    padding-bottom: 30px;
+  }
+
+  p {
+    font-size: 24px;
+  }
 }

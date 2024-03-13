@@ -10,14 +10,18 @@
   }
 }
 .sort__dropdown {
+  background-color: #5f5077;
+
   position: absolute;
-  bottom: -150px;
+  bottom: -100px;
   width: 100%;
   margin-top: 10px;
-  background-color: #45218056;
   li {
     cursor: pointer;
     padding: 10px;
     color: #fff;
+  }
+  &.active {
+    background-color: var(--mainColor);
   }
 }

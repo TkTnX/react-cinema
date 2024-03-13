@@ -1,12 +1,14 @@
 import React from "react";
 import "./_card.scss";
 import { cardType } from "../../pages/Home";
-
-export const Card: React.FC<cardType> = ({ title, price, img }) => {
+import { Link } from "react-router-dom";
+export const Card: React.FC<cardType> = ({ title, price, img, id }) => {
   return (
     <div className="card">
-      <img src={img} alt="Фильм" />
-      <h3 className="card__title">{title}</h3>
+      <Link to={`film/${id}`}>
+        <img src={img} alt="Фильм" />
+        <h3 className="card__title">{title}</h3>
+      </Link>
       <div className="card__bottom">
         <p className="cadt__price">от {price} ₽</p>
         <button className="card__btn">Купить</button>

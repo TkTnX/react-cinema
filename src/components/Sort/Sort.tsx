@@ -1,13 +1,52 @@
 import React, { useRef, useState } from "react";
 import "./_sort.scss";
+import { SortDataType } from "../../pages/Home";
 
-const sortList = ["Цене", "Популярности", "Дате"];
+const sortList = [
+  "Цене ↑",
+  "Цене ↓",
+  "Популярности ↑",
+  "Популярности ↓",
+  "Дате ↑",
+  "Дате ↓",
+];
+const sortObj = [
+  {
+    title: "Цене ↑",
+    sortBy: "price",
+  },
+  {
+    title: "Цене ↓",
+    sortBy: "-price",
+  },
+  {
+    title: "Популярности ↑",
+    sortBy: "rating",
+  },
+  {
+    title: "Популярности ↓",
+    sortBy: "-rating",
+  },
+  {
+    title: "Дате ↑",
+    sortBy: "date",
+  },
+  {
+    title: "Дате ↓",
+    sortBy: "-date",
+  },
+];
 
-export const Sort: React.FC = () => {
+type SortType = {
+  setSortData: (sortItem: SortDataType) => void;
+};
+
+export const Sort: React.FC<SortType> = ({ setSortData }) => {
   const [activeSortItem, setActiveSortItem] = useState(0);
 
   const [openPopup, setOpenPopup] = useState(false);
   const sortRef = useRef(null);
+
   const onClickSortItem = (index: number) => {
     setActiveSortItem(index);
     setOpenPopup(false);
@@ -19,6 +58,11 @@ export const Sort: React.FC = () => {
     }
   });
 
+  const onClickChangeSortItem = (index: number, sortItem: SortDataType) => {
+    onClickSortItem(index);
+    setSortData(sortItem);
+  };
+
   return (
     <div className="sort" ref={sortRef}>
       <div className="sort__title" onClick={() => setOpenPopup(!openPopup)}>
@@ -26,14 +70,14 @@ export const Sort: React.FC = () => {
       </div>
       {openPopup && (
         <ul className="sort__dropdown">
-          {sortList.map((sortItem, index) => {
+          {sortObj.map((sortItem, index) => {
             return (
               <li
-                onClick={() => onClickSortItem(index)}
+                onClick={() => onClickChangeSortItem(index, sortItem)}
                 className={activeSortItem === index ? "active" : ""}
                 key={index}
               >
-                {sortItem}
+                {sortItem.title}
               </li>
             );
           })}
