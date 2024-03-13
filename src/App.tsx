@@ -11,6 +11,21 @@ export type searchValueType = {
   searchValue?: string;
 };
 
+
+
+
+
+// TODO Пагинация
+// TODO (Попробовать подключить редакс)
+
+
+
+
+
+
+
+
+
 const App = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   return (

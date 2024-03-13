@@ -19,7 +19,7 @@ export const Film: React.FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`https://3bf477bc259d6f0b4.mokky.dev/films/${id}`)
+      .get(`https://3bf477bc2596f0b4.mokky.dev/films/${id}`)
       .then((res) => setFilm(res.data))
       .catch((err) => {
         console.error(err);
