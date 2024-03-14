@@ -1,0 +1,27 @@
+.pagination {
+  :global {
+    li.selected {
+      a {
+        background-color: var(--mainColor);
+        color: #fff;
+      }
+    }
+    li.disabled {
+      a {
+        background-color: var(--mainColor);
+        color: #fff;
+      }
+    }
+  }
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  a {
+    border: 1px solid var(--mainColor);
+    padding: 5px 13px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+}

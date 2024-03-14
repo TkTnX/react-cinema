@@ -1,7 +1,7 @@
 import React from "react";
 import "./_card.scss";
-import { cardType } from "../../pages/Home";
 import { Link } from "react-router-dom";
+import { cardType } from "../../pages/Home/Types";
 export const Card: React.FC<cardType> = ({ title, price, img, id }) => {
   return (
     <div className="card">

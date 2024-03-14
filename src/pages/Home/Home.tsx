@@ -1,28 +1,12 @@
-import { Categories } from "./../components/Categories/Categories";
-import { Sort } from "./../components/Sort/Sort";
-import { Card } from "../components/Card/Card";
+import { Categories } from "../../components/Categories/Categories";
+import { Sort } from "../../components/Sort/Sort";
+import { Card } from "../../components/Card/Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Skeleton } from "../components/Skeleton/Skeleton";
-import { searchValueType } from "../App";
-import { useNavigate } from "react-router-dom";
-
-export type cardType = {
-  id: number;
-  title: string;
-  price: number;
-  rating: number;
-  category: string;
-  date: number;
-  img: string;
-  description: string;
-  director: string;
-};
-
-export type SortDataType = {
-  title: string;
-  sortBy: string;
-};
+import { searchValueType } from "../../App";
+import { Skeleton } from "../../components/Skeleton/Skeleton";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { SortDataType, cardType } from "./Types";
 
 export const Home: React.FC<searchValueType> = ({ searchValue }) => {
   const [data, setData] = useState([]);
@@ -31,19 +15,23 @@ export const Home: React.FC<searchValueType> = ({ searchValue }) => {
     sortBy: "price",
   });
   const [categoryData, setCategoryData] = useState("Все");
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(
-        `https://3bf477bc2596f0b4.mokky.dev/films?${
+        `https://3bf477bc2596f0b4.mokky.dev/films?limit=4&page=${currentPage}&${
           categoryData !== "Все" ? `category=${categoryData}` : ""
         }&sortBy=${sortData.sortBy}`
       )
-      .then((res) => setData(res.data))
-      .finally(() => setIsLoading(false));
-  }, [sortData, categoryData]);
+      .then((res) => setData(res.data.items))
+      .finally(() => {
+        setIsLoading(false);
+        window.scrollTo(0, 0);
+      });
+  }, [sortData, categoryData, currentPage]);
 
   if (searchValue === undefined) {
     return undefined;
@@ -63,19 +51,18 @@ export const Home: React.FC<searchValueType> = ({ searchValue }) => {
       </div>
       <div className="container">
         <div className="catalog">
-          {filteredFilms.length === 0 ? (
+          {isLoading
+            ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
+            : filteredFilms.map((card: cardType) => (
+                <Card {...card} key={card.id} />
+              ))}
+          {filteredFilms.length === 0 && (
             <div className="not-found">
               <h2>Фильмы не найдены!</h2>
-              <p>Похоже, у нас в каталоге нет таких фильмов.</p>
             </div>
-          ) : isLoading ? (
-            [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-          ) : (
-            filteredFilms.map((card: cardType) => (
-              <Card {...card} key={card.id} />
-            ))
           )}
         </div>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
     </>
   );

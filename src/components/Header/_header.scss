@@ -27,14 +27,23 @@
   font-size: 25px;
 }
 .header__search {
+  position: relative;
+  border: 1px solid var(--mainColor);
+  border-radius: 35px;
+  overflow: hidden;
+
   input {
-    border: 1px solid var(--mainColor);
     padding: 10px 20px;
-    border-radius: 35px;
 
     &::placeholder {
       color: var(--mainColor);
       font-weight: 300;
     }
+  }
+  button {
+    position: absolute;
+    right: 15px;
+    top: 53%;
+    transform: translateY(-50%);
   }
 }

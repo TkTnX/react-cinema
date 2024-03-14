@@ -1,0 +1,22 @@
+.notFound {
+  text-align: center;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+}
+
+.btn {
+  border: 1px solid var(--mainColor);
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: var(--mainColor);
+  color: #fff;
+  margin-left: 10px;
+}

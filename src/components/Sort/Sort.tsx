@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./_sort.scss";
-import { SortDataType } from "../../pages/Home";
+import { SortDataType } from "../../pages/Home/Home";
 
 const sortList = [
   "Цене ↑",
