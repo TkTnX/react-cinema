@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import "./_categories.scss";
-
+import { useDispatch } from "react-redux";
+import { setCategoryValue } from "../../redux/slices/filterSlice";
+import { CategoriesDataType } from "./Types";
 const categoriesList = ["Все", "Комедия", "Хоррор", "Фентези", "Драма"];
 
-export type CategoriesDataType = {
-  setCategoryData: (categoryItem: string) => void;
-  categoryItem?: string;
-};
-
-export const Categories: React.FC<CategoriesDataType> = ({
-  setCategoryData,
-}) => {
+export const Categories: React.FC<CategoriesDataType> = () => {
   const [activeCategory, setActiveCategory] = useState(0);
+
+  const dispatch = useDispatch();
 
   const onClickSetCategoryData = (index: number, categoryItem: string) => {
     setActiveCategory(index);
-    setCategoryData(categoryItem);
+    dispatch(setCategoryValue(categoryItem));
   };
 
   return (

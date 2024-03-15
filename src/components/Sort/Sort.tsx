@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import "./_sort.scss";
-import { SortDataType } from "../../pages/Home/Home";
-
+import { SortDataType } from "../../pages/Home/Types";
+import { useDispatch } from "react-redux";
+import { setSortValue } from "../../redux/slices/filterSlice";
 const sortList = [
   "Цене ↑",
   "Цене ↓",
@@ -37,15 +38,13 @@ const sortObj = [
   },
 ];
 
-type SortType = {
-  setSortData: (sortItem: SortDataType) => void;
-};
-
-export const Sort: React.FC<SortType> = ({ setSortData }) => {
+export const Sort: React.FC = () => {
   const [activeSortItem, setActiveSortItem] = useState(0);
 
   const [openPopup, setOpenPopup] = useState(false);
   const sortRef = useRef(null);
+
+  const dispatch = useDispatch();
 
   const onClickSortItem = (index: number) => {
     setActiveSortItem(index);
@@ -60,7 +59,7 @@ export const Sort: React.FC<SortType> = ({ setSortData }) => {
 
   const onClickChangeSortItem = (index: number, sortItem: SortDataType) => {
     onClickSortItem(index);
-    setSortData(sortItem);
+    dispatch(setSortValue(sortItem));
   };
 
   return (

@@ -2,21 +2,26 @@ import React, { ChangeEvent, useCallback, useState, useRef } from "react";
 import "./_header.scss";
 import logo from "./logo.svg";
 import { searchValueType } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFilterSearch,
+  setSearchValue,
+} from "../../redux/slices/filterSlice";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
-export const Header: React.FC<searchValueType> = ({
-  setSearchValue,
-  searchValue,
-}) => {
+export const Header: React.FC<searchValueType> = () => {
+  const dispatch = useDispatch();
+  const searchValueState = useSelector(selectFilterSearch);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState<string>("");
-  if (setSearchValue === undefined) {
+  if (searchValueState === undefined) {
     return null;
   }
 
   const inputTimeOut = useCallback(
     debounce((str: string) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 400),
     []
   );
@@ -29,7 +34,7 @@ export const Header: React.FC<searchValueType> = ({
   const onClearInput = () => {
     inputRef.current?.focus();
 
-    setSearchValue("");
+    dispatch(setSearchValue(""));
     setValue("");
   };
 
@@ -53,7 +58,7 @@ export const Header: React.FC<searchValueType> = ({
                 type="text"
                 placeholder="Найти фильм"
               />
-              {searchValue !== undefined && searchValue.length > 0 ? (
+              {searchValueState !== undefined && searchValueState.length > 0 ? (
                 <button onClick={onClearInput}>
                   <svg
                     width="17"

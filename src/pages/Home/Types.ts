@@ -16,6 +16,6 @@ export type SortDataType = {
 };
 
 export type CurrentPageType = {
-  currentPage: number;
+  currentPage?: number;
   setCurrentPage: (event: number) => void;
 };
