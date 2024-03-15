@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,13 +32,12 @@ export const Home: React.FC<searchValueType> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      fetchFilms({
-        currentPage,
-        categoryValue,
-        sortValue,
-      })
-    );
+    const fetchFilmsAction: any = fetchFilms({
+      currentPage,
+      categoryValue,
+      sortValue,
+    });
+    dispatch(fetchFilmsAction);
 
     window.scrollTo(0, 0);
   }, [setSortValue, categoryValue, currentPage]);
